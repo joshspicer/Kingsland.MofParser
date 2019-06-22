@@ -10,12 +10,15 @@ namespace Kingsland.FileFormat.Mof.Tests
         static void Main(string[] args)
         {
 
-            const string filename = "dsc\\MyServer.mof";
+            const string filename = @"C:\Users\t-jospic\source\repos\schema-to-swagger\schema-to-swagger\input\schema.mof";
+            Console.WriteLine("loading: "+filename);
 
             // parse the mof file
-            var instances = PowerShellDscHelper.ParseMofFileInstances(filename);
+            /*var instances = PowerShellDscHelper.ParseMofFileInstances(filename); */
 
-            // display the instances
+            PowerShellDscHelper.ParseMofFileInstances(filename);
+
+       /*     // display the instances
             foreach (var instance in instances)
             {
                 Console.WriteLine("--------------------------");
@@ -33,7 +36,7 @@ namespace Kingsland.FileFormat.Mof.Tests
                 }
                 Console.WriteLine("--------------------------");
             }
-
+*/
         }
 
     }

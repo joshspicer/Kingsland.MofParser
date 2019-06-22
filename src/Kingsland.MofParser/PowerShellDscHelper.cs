@@ -10,10 +10,12 @@ using System.Linq;
 namespace Kingsland.MofParser
 {
 
+   
+
     public static class PowerShellDscHelper
     {
 
-        public static List<Instance> ParseMofFileInstances(string filename)
+        public static void ParseMofFileInstances(string filename)
         {
 
             // read the text from the mof file
@@ -29,14 +31,25 @@ namespace Kingsland.MofParser
             var ast = Parser.Parse(tokens);
 
             // scan the ast for any "instance" definitions and convert them
-            var instances = ((MofSpecificationAst)ast).Productions
-                                                      .Where(p => (p is InstanceValueDeclarationAst))
-                                                      .Cast<InstanceValueDeclarationAst>()
-                                                      .Select(Instance.FromAstNode)
-                                                      .ToList();
+            /*            var instances = ((MofSpecificationAst)ast).Productions
+                                                                  .Where(p => (p is InstanceValueDeclarationAst))
+                                                                  .Cast<InstanceValueDeclarationAst>()
+                                                                  .Select(Instance.FromAstNode)
+                                                                  .ToList();*/
+
+            var classes = ((MofSpecificationAst)ast).Productions
+                                          .Where(p => (p is ClassDeclarationAst))
+                                          .Cast<ClassDeclarationAst>()
+                                          .ToList();
+
+            foreach(var cc in classes)
+            {
+                System.Console.WriteLine(cc.ClassName);
+            }
+
 
             // return the result
-            return instances.ToList();
+            //return instances.ToList();
 
         }
 
